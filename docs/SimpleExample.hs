@@ -1,4 +1,4 @@
-import           System.Console.GetOpt.Generics
+import System.Console.GetOpt.Generics
 
 main :: IO ()
 main = simpleCLI myMain

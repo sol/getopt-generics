@@ -1,7 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 
-import           Data.Typeable
-import           System.Console.GetOpt.Generics
+import Data.Typeable
+import System.Console.GetOpt.Generics
 
 data File = File FilePath
   deriving (Show, Typeable)

@@ -20,11 +20,14 @@ import           System.Console.GetOpt.Generics.GetArguments
 import           System.Console.GetOpt.Generics.Modifier
 import           System.Console.GetOpt.Generics.Result
 
-class SingI (ArgumentTypes main) => SimpleCLI main where
+class (All Option (ArgumentTypes main)) => SimpleCLI main where
   {-# MINIMAL _initialFieldStates, _run #-}
   type ArgumentTypes main :: [*]
   _initialFieldStates :: Proxy main -> NP FieldState (ArgumentTypes main)
   _run :: NP I (ArgumentTypes main) -> main -> IO ()
+  singI :: Proxy main -> Proxy (Wrapper main)
+
+data Wrapper a = Wrapper a
 
 -- | 'simpleCLI' converts an IO operation into a program with a proper CLI.
 --   Retrieves command line arguments through 'withArgs'.
@@ -69,15 +72,14 @@ class SingI (ArgumentTypes main) => SimpleCLI main where
 
 -- ### End ###
 
-simpleCLI :: forall main . (SimpleCLI main, All Option (ArgumentTypes main)) =>
-  main -> IO ()
+simpleCLI :: forall main . (SimpleCLI main) => main -> IO ()
 simpleCLI main = do
   args <- getArgs
   progName <- getProgName
   let result = do
         outputInfo progName (mkModifiers []) args
-          (hliftA (const $ Comp NoSelector) (_initialFieldStates (Proxy :: Proxy main)))
-        filledIn <- fillInPositionalArguments args (_initialFieldStates (Proxy :: Proxy main))
+          (hliftA (const $ Comp NoSelector) (_initialFieldStates $ singI (Proxy :: Proxy main)))
+        filledIn <- fillInPositionalArguments args (_initialFieldStates $ singI (Proxy :: Proxy main))
         collectResult filledIn
   f <- handleResult result
   _run f main
