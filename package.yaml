@@ -25,7 +25,6 @@ library:
     - src
   exposed-modules:
     - SimpleCLI
-    - System.Console.GetOpt.Generics
 
 tests:
   spec:

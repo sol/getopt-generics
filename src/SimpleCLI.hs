@@ -6,13 +6,22 @@
 {-# LANGUAGE TypeFamilies #-}
 
 module SimpleCLI (
+
+  -- * simple interface
   simpleCLI,
   SimpleCLI,
+
+  -- * custom Option types
   Option(argumentType, parseArgument),
   HasOptions(fromArguments),
   fromArgumentsOption,
-  parseArguments,
 
+  -- * pure interface
+  parseArguments,
+  Modifier(..),
+  Result(..),
+
+  -- * re-exports
   SOP.Generic,
   SOP.HasDatatypeInfo,
   Typeable,
