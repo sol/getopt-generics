@@ -57,11 +57,11 @@ library
       SimpleCLI.FromArguments
       SimpleCLI.HasOptions
       SimpleCLI.HelpFlag
+      SimpleCLI.Modifier
+      SimpleCLI.Normalize
       SimpleCLI.Option
       SimpleCLI.Result
-      System.Console.GetOpt.Generics.FieldString
-      System.Console.GetOpt.Generics.Modifier
-      System.Console.GetOpt.Generics.Modifier.Types
+      SimpleCLI.Types
   default-language: Haskell2010
 
 test-suite spec
@@ -88,11 +88,11 @@ test-suite spec
       SimpleCLI.FromArguments
       SimpleCLI.HasOptions
       SimpleCLI.HelpFlag
+      SimpleCLI.Modifier
+      SimpleCLI.Normalize
       SimpleCLI.Option
       SimpleCLI.Result
-      System.Console.GetOpt.Generics.FieldString
-      System.Console.GetOpt.Generics.Modifier
-      System.Console.GetOpt.Generics.Modifier.Types
+      SimpleCLI.Types
       ExamplesSpec
       ModifiersSpec
       ModifiersSpec.RenameOptionsSpec

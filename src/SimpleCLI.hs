@@ -33,9 +33,9 @@ import           System.Environment
 
 import           SimpleCLI.FromArguments
 import           SimpleCLI.HasOptions
+import           SimpleCLI.Modifier
 import           SimpleCLI.Option
 import           SimpleCLI.Result
-import           System.Console.GetOpt.Generics.Modifier
 
 -- | 'simpleCLI' converts an IO operation into a program with a proper CLI.
 --   Retrieves command line arguments through 'withArgs'.

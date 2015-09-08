@@ -4,7 +4,7 @@
 {-# LANGUAGE TupleSections    #-}
 {-# LANGUAGE ViewPatterns     #-}
 
-module System.Console.GetOpt.Generics.Modifier (
+module SimpleCLI.Modifier (
   Modifier(..),
   Modifiers,
   mkModifiers,
@@ -31,7 +31,7 @@ import           System.Console.GetOpt
 
 import           SimpleCLI.FromArguments
 import           SimpleCLI.Result
-import           System.Console.GetOpt.Generics.Modifier.Types
+import           SimpleCLI.Types
 
 -- | 'Modifier's can be used to customize the command line parser.
 data Modifier

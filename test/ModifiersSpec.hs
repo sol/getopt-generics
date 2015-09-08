@@ -5,8 +5,8 @@ module ModifiersSpec where
 import           Data.List
 import           Test.Hspec
 
+import           SimpleCLI.Modifier
 import           SimpleCLI.Result
-import           System.Console.GetOpt.Generics.Modifier
 import           System.Console.GetOpt.GenericsSpec
 import           Util
 

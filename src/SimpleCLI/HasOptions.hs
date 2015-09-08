@@ -35,10 +35,10 @@ import           System.Console.GetOpt
 import           Text.Read
 
 import           SimpleCLI.FromArguments
+import           SimpleCLI.Modifier
 import           SimpleCLI.Normalize
 import           SimpleCLI.Option
 import           SimpleCLI.Result
-import           System.Console.GetOpt.Generics.Modifier
 
 parseArgumentResult :: forall a . Option a => Maybe String -> String -> Result a
 parseArgumentResult mMsg s = case parseArgument s of

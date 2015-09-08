@@ -6,7 +6,7 @@ import qualified GHC.Generics
 import           Generics.SOP
 import           Test.Hspec
 
-import           System.Console.GetOpt.Generics.Modifier
+import           SimpleCLI.Modifier
 import           Util
 
 spec :: Spec
