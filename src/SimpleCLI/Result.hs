@@ -12,7 +12,7 @@ import           Prelude ()
 import           Prelude.Compat
 
 import           Control.Arrow
-import           Data.List
+import           Data.List.Compat
 import           System.Exit
 import           System.IO
 
