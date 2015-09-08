@@ -16,8 +16,8 @@ import           Data.Monoid
 import           System.Console.GetOpt as Base
 
 import           SimpleCLI.HelpFlag
+import           SimpleCLI.Normalize
 import           SimpleCLI.Result
-import           System.Console.GetOpt.Generics.FieldString
 import           System.Console.GetOpt.Generics.Modifier.Types
 
 data Help a

@@ -11,7 +11,7 @@ module SimpleCLI (
   simpleCLI,
   SimpleCLI,
 
-  -- * custom Option types
+  -- * Option types
   Option(argumentType, parseArgument),
   HasOptions(fromArguments),
   fromArgumentsOption,
@@ -24,7 +24,6 @@ module SimpleCLI (
   -- * re-exports
   SOP.Generic,
   SOP.HasDatatypeInfo,
-  Typeable,
   Proxy(..),
   ) where
 

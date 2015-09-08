@@ -5,7 +5,7 @@ module CustomOption where
 import SimpleCLI
 
 data File = File FilePath
-  deriving (Show, Typeable)
+  deriving (Show)
 
 instance Option File where
   argumentType Proxy = "custom-file-type"

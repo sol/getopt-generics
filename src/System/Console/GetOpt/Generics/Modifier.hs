@@ -12,13 +12,10 @@ module System.Console.GetOpt.Generics.Modifier (
   getPositionalArgumentType,
   getVersion,
 
-  deriveShortOptions,
-
   applyModifiers,
   applyModifiersLong,
 
   -- exported for testing
-  mkShortModifiers,
   insertWith,
  ) where
 
@@ -30,12 +27,10 @@ import           Control.Monad
 import           Data.Char
 import           Data.List (foldl')
 import           Data.Maybe
-import           Generics.SOP
 import           System.Console.GetOpt
 
 import           SimpleCLI.FromArguments
 import           SimpleCLI.Result
-import           System.Console.GetOpt.Generics.FieldString
 import           System.Console.GetOpt.Generics.Modifier.Types
 
 -- | 'Modifier's can be used to customize the command line parser.
@@ -78,9 +73,9 @@ mkModifiers = foldM inner empty
       (AddShortOption option short) ->
         return $ Modifiers (insertWith (++) option [short] shorts) renaming args help version
       (RenameOption from to) ->
-        let newRenaming :: FieldString -> FieldString
-            newRenaming option = if from `matches` option
-              then mkFieldString to
+        let newRenaming :: String -> String
+            newRenaming option = if from == option
+              then to
               else option
         in return $ Modifiers shorts (renaming . newRenaming) args help version
       (RenameOptions newRenaming) ->
@@ -93,57 +88,14 @@ mkModifiers = foldM inner empty
       (AddVersionFlag v) ->
         return $ Modifiers shorts renaming args help (Just v)
 
-    combineRenamings :: (FieldString -> FieldString) -> (String -> Maybe String)
-      -> FieldString -> FieldString
+    combineRenamings :: (String -> String) -> (String -> Maybe String)
+      -> String -> String
     combineRenamings old new fieldString =
-      (old . renameUnnormalized new) fieldString
+      (old . rename new) fieldString
 
--- * deriving Modifiers
-
--- | Derives 'AddShortOption's for all fields of the datatype that start with a
---   unique character.
-deriveShortOptions :: (HasDatatypeInfo a, SingI (Code a)) =>
-  Proxy a -> [Modifier]
-deriveShortOptions proxy =
-  mkShortModifiers (flags proxy)
-
-flags :: (SingI (Code a), HasDatatypeInfo a) =>
-  Proxy a -> [String]
-flags proxy = case datatypeInfo proxy of
-    ADT _ _ ci -> fromNPConstructorInfo ci
-    Newtype _ _ ci -> fromConstructorInfo ci
-  where
-    fromNPConstructorInfo :: NP ConstructorInfo xs -> [String]
-    fromNPConstructorInfo Nil = []
-    fromNPConstructorInfo (a :* r) =
-      fromConstructorInfo a ++ fromNPConstructorInfo r
-
-    fromConstructorInfo :: ConstructorInfo x -> [String]
-    fromConstructorInfo (Constructor _) = []
-    fromConstructorInfo (Infix _ _ _) = []
-    fromConstructorInfo (Record _ fields) =
-      fromFields fields
-
-    fromFields :: NP FieldInfo xs -> [String]
-    fromFields (FieldInfo name :* r) = name : fromFields r
-    fromFields Nil = []
-
-mkShortModifiers :: [String] -> [Modifier]
-mkShortModifiers fields =
-    let withShorts = mapMaybe (\ field -> (field, ) <$> toShort field) fields
-        allShorts = map snd withShorts
-        isUnique c = case filter (== c) allShorts of
-          [_] -> True
-          _ -> False
-    in (flip mapMaybe) withShorts $ \ (field, short) ->
-          if isUnique short
-            then Just (AddShortOption field short)
-            else Nothing
-  where
-    toShort :: String -> Maybe Char
-    toShort s = case dropWhile (\ c -> not (isAscii c && isAlpha c)) s of
-      [] -> Nothing
-      (a : _) -> Just (toLower a)
+rename :: (String -> Maybe String) -> (String -> String)
+rename f input =
+  fromMaybe input (f input)
 
 -- * list utils to replace Data.Map
 

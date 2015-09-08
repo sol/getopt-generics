@@ -35,9 +35,9 @@ import           System.Console.GetOpt
 import           Text.Read
 
 import           SimpleCLI.FromArguments
+import           SimpleCLI.Normalize
 import           SimpleCLI.Option
 import           SimpleCLI.Result
-import           System.Console.GetOpt.Generics.FieldString
 import           System.Console.GetOpt.Generics.Modifier
 
 parseArgumentResult :: forall a . Option a => Maybe String -> String -> Result a
