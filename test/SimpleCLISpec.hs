@@ -24,7 +24,7 @@ import           SimpleCLI.HasOptions
 import           SimpleCLI.Result
 import           Util
 
--- fixme: renumber
+ -- fixme: renumber
 
 spec :: Spec
 spec = do
@@ -254,7 +254,7 @@ part6 = do
         (parse "42 bar" :: Result (Int, String))
           `shouldBe` Success (42, "bar")
 
--- fixme: put tests in correct modules
+ -- fixme: put tests in correct modules
 
   describe "parseBool" $ do
     forM_ ["true", "True", "tRue", "TRUE", "yes", "yEs", "on", "oN"] $ \ true ->

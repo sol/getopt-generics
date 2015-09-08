@@ -2,13 +2,13 @@
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE TypeFamilies #-}
 
-module CustomOptionsExample where
+module CustomOptionRecord where
 
 import qualified GHC.Generics
 import           SimpleCLI
 
 data File = File FilePath
-  deriving (Show, Typeable)
+  deriving (Show)
 
 instance Option File where
   argumentType Proxy = "custom-file-type"
@@ -19,8 +19,6 @@ data Options
     file :: File
   }
   deriving (Show, GHC.Generics.Generic)
-
--- fixme: less needed?
 
 instance Generic Options
 instance HasDatatypeInfo Options

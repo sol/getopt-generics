@@ -60,7 +60,7 @@ data Modifier
   | AddVersionFlag String
     -- ^ @AddVersionFlag version@ adds a @--version@ flag.
 
--- fixme: dcd
+ -- fixme: dcd
 
 mkModifiers :: [Modifier] -> Result Modifiers
 mkModifiers = foldM inner empty
@@ -143,5 +143,5 @@ modLongs :: (String -> String) -> OptDescr a -> OptDescr a
 modLongs f (Option shorts longs descrs help) =
   Option shorts (map f longs) descrs help
 
--- fixme: tests for conflicting flags
+ -- fixme: tests for conflicting flags
 -- todo: test for overlapping modifiers

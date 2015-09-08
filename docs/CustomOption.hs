@@ -1,5 +1,5 @@
--- fixme: into haddock
--- fixme: add explanation
+ -- fixme: into haddock
+ -- fixme: add explanation
 module CustomOption where
 
 import SimpleCLI

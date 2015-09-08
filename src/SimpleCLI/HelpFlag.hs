@@ -20,5 +20,5 @@ versionOption :: a -> OptDescr a
 versionOption versionFlag =
   Option ['v'] ["version"] (NoArg versionFlag) "show version and exit"
 
--- fixme: disentangle
--- fixme: rename module
+ -- fixme: disentangle
+ -- fixme: rename module

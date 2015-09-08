@@ -62,7 +62,7 @@ class HasOptions a where
 -- * atomic HasOptions
 
 -- todo: better instance derivation for HasOptions
--- fixme: DRY up
+ -- fixme: DRY up
 
 instance HasOptions Int where
   fromArguments modifiers (Just field) =
@@ -93,7 +93,7 @@ instance Option a => HasOptions [a] where
   fromArguments _ Nothing =
     fromArgumentsList Nothing
 
--- fixme: warnings
+ -- fixme: warnings
 
 fromArgumentsOption :: forall a . Option a =>
   Modifiers ->
@@ -232,8 +232,8 @@ fromArgumentsGeneric modifiers = fmap (fmap to) $ case datatypeInfo (Proxy :: Pr
       "getopt-generics doesn't support " ++ message ++
       " (" ++ typeName ++ ")."
 
--- fixme: combinators?
--- fixme: consistent syntax
+ -- fixme: combinators?
+ -- fixme: consistent syntax
 fromArgumentsFields :: All HasOptions xs => Modifiers -> NP FieldInfo xs -> Result (FromArguments Unnormalized (NP I xs))
 fromArgumentsFields _ Nil = return $ emptyFromArguments Nil
 fromArgumentsFields modifiers (FieldInfo fieldName :* rest) =
