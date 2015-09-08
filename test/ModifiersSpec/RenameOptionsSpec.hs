@@ -7,7 +7,9 @@ import           Data.List
 import qualified GHC.Generics
 import           Test.Hspec
 
-import           System.Console.GetOpt.Generics
+import           SimpleCLI
+import           SimpleCLI.Result
+import           System.Console.GetOpt.Generics.Modifier
 import           Util
 
 data Foo

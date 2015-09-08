@@ -13,16 +13,16 @@ import           Data.Foldable (forM_)
 import           Data.List (isPrefixOf, isSuffixOf)
 import           Data.Typeable
 import qualified GHC.Generics as GHC
-import           System.Environment
+import           Generics.SOP
 import           System.Exit
 import           System.IO
 import           System.IO.Silently
 import           Test.Hspec
 import           Test.QuickCheck hiding (Result(..))
 
+import           SimpleCLI
 import           SimpleCLI.HasOptions
 import           SimpleCLI.Result
-import           System.Console.GetOpt.Generics
 import           Util
 
 -- fixme: renumber
@@ -56,12 +56,11 @@ instance HasDatatypeInfo NotAllowed
 
 part1 :: Spec
 part1 = do
-  describe "getArguments" $ do
-    it "parses command line arguments" $ do
-      withArgs (words "--bar 4 --baz foo") $
-        getArguments `shouldReturn` Foo (Just 4) "foo" False
-
   describe "parseArguments" $ do
+    it "parses command line arguments" $ do
+      parse "--bar 4 --baz foo" `shouldBe`
+        Success (Foo (Just 4) "foo" False)
+
     it "allows optional arguments" $ do
       parse "--baz foo" `shouldBe`
         Success (Foo Nothing "foo" False)

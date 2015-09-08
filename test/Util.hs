@@ -2,7 +2,10 @@
 
 module Util where
 
-import           System.Console.GetOpt.Generics
+import           Generics.SOP
+
+import           SimpleCLI
+import           SimpleCLI.Result
 import           System.Console.GetOpt.Generics.Modifier
 
 parse :: (Generic a, HasDatatypeInfo a, All2 HasOptions (Code a)) =>

@@ -3,7 +3,9 @@
 module SimpleRecord where
 
 import qualified GHC.Generics
-import           System.Console.GetOpt.Generics
+import           Generics.SOP
+
+import           SimpleCLI
 
 -- All you have to do is to define a type and derive some instances:
 

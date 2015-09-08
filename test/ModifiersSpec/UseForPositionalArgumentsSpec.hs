@@ -5,10 +5,13 @@ module ModifiersSpec.UseForPositionalArgumentsSpec where
 
 import           Data.List
 import qualified GHC.Generics as GHC
+import           Generics.SOP
 import           System.Environment
 import           Test.Hspec
 
-import           System.Console.GetOpt.Generics
+import           SimpleCLI
+import           SimpleCLI.Result
+import           System.Console.GetOpt.Generics.Modifier
 import           Util
 
 data WithPositionalArguments

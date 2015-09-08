@@ -11,6 +11,7 @@ module SimpleCLI (
   Option(argumentType, parseArgument),
   HasOptions(fromArguments),
   fromArgumentsOption,
+  parseArguments,
 
   SOP.Generic,
   SOP.HasDatatypeInfo,
@@ -19,7 +20,7 @@ module SimpleCLI (
   ) where
 
 import           Data.Typeable
-import qualified Generics.SOP as SOP
+import           Generics.SOP as SOP
 import           System.Environment
 
 import           SimpleCLI.FromArguments
@@ -106,3 +107,17 @@ instance SimpleCLI (IO ()) where
 instance (HasOptions a, SimpleCLI rest) => SimpleCLI (a -> rest) where
   run modifiers fa mkMain args =
     run modifiers (combine fa (fromArguments modifiers Nothing)) (\ (a, r) -> mkMain a r) args
+
+-- | Pure variant of 'simpleCLI'.
+--
+--   Does not throw any exceptions.
+parseArguments :: forall a . (Generic a, HasDatatypeInfo a, All2 HasOptions (Code a)) =>
+     String -- ^ Name of the program (e.g. from 'getProgName').
+  -> [Modifier] -- ^ List of 'Modifier's to manually tweak the command line interface.
+  -> [String] -- ^ List of command line arguments to parse (e.g. from 'getArgs').
+  -> Result a
+parseArguments progName mods args = do
+  modifiers <- mkModifiers mods
+  fromArguments <- fromArgumentsGeneric modifiers
+  parseFromArguments progName modifiers
+    (normalizeFromArguments (applyModifiers modifiers fromArguments)) args
