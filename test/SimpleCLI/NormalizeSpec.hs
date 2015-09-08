@@ -1,6 +1,6 @@
 {-# LANGUAGE ViewPatterns #-}
 
-module System.Console.GetOpt.Generics.FieldStringSpec where
+module SimpleCLI.NormalizeSpec where
 
 import           Data.Char
 import           Test.Hspec

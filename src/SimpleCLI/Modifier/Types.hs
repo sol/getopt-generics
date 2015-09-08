@@ -1,5 +1,5 @@
 
-module SimpleCLI.Types where
+module SimpleCLI.Modifier.Types where
 
 data Modifiers = Modifiers {
   shortOptions :: [(String, [Char])],

@@ -7,11 +7,21 @@ import           Test.Hspec
 
 import           SimpleCLI.Modifier
 import           SimpleCLI.Result
-import           System.Console.GetOpt.GenericsSpec
+import           SimpleCLISpec
 import           Util
 
 spec :: Spec
 spec = do
+  describe "insertWith" $ do
+    it "combines existing values with the given function" $ do
+      insertWith (++) (1 :: Integer) "bar" [(1, "foo")]
+        `shouldBe` [(1, "foobar")]
+
+  describe "getVersion" $ do
+    it "returns the version" $ do
+      let modifiers = unsafeModifiers [AddVersionFlag "1.0.0"]
+      getVersion modifiers `shouldBe` Just "1.0.0"
+
   describe "AddShortOption" $ do
     it "allows modifiers for short options" $ do
       modsParse [AddShortOption "camelCase" 'x'] "-x foo"

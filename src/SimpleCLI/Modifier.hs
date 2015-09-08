@@ -30,8 +30,8 @@ import           Data.Maybe
 import           System.Console.GetOpt
 
 import           SimpleCLI.FromArguments
+import           SimpleCLI.Modifier.Types
 import           SimpleCLI.Result
-import           SimpleCLI.Types
 
 -- | 'Modifier's can be used to customize the command line parser.
 data Modifier

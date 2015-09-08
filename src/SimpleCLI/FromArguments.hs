@@ -18,7 +18,7 @@ import           System.Console.GetOpt as Base
 import           SimpleCLI.HelpFlag
 import           SimpleCLI.Normalize
 import           SimpleCLI.Result
-import           SimpleCLI.Types
+import           SimpleCLI.Modifier.Types
 
 data Help a
   = Help
