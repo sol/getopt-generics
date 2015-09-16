@@ -19,7 +19,7 @@ import           Data.List
 import           Data.Proxy
 import           Text.Read
 
- -- fixme: better names for HasOptions and Options
+ -- fixme: better names for HasOptions and Option
 
 class Option a where
   argumentType :: Proxy a -> String
@@ -55,7 +55,5 @@ readFloat s = case readMaybe s of
  -- fixme: CustomOptionsExample
 
 -- todo: clean up old modules
-
--- todo: figure out modifiers
 
 -- todo: clean up old modules 2

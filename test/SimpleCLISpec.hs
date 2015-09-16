@@ -24,19 +24,17 @@ import           SimpleCLI.HasOptions
 import           SimpleCLI.Result
 import           Util
 
- -- fixme: renumber
-
 spec :: Spec
 spec = do
-  part0
   part1
   part2
   part3
   part4
+  part5
   part6
 
-part0 :: Spec
-part0 = do
+part1 :: Spec
+part1 = do
   describe "simpleCLI" $ do
     context "no arguments" $ do
       it "executes the operation in case of no command line arguments" $ do
@@ -83,8 +81,8 @@ data NotAllowed
 instance Generic NotAllowed
 instance HasDatatypeInfo NotAllowed
 
-part1 :: Spec
-part1 = do
+part2 :: Spec
+part2 = do
   describe "parseArguments" $ do
     it "parses command line arguments" $ do
       parse "--bar 4 --baz foo" `shouldBe`
@@ -165,8 +163,8 @@ data ListOptions
 instance Generic ListOptions
 instance HasDatatypeInfo ListOptions
 
-part2 :: Spec
-part2 = do
+part3 :: Spec
+part3 = do
   describe "parseArguments" $ do
     it "allows to interpret multiple uses of the same option as lists" $ do
       parse "--multiple 23 --multiple 42"
@@ -186,8 +184,8 @@ data CamelCaseOptions
 instance Generic CamelCaseOptions
 instance HasDatatypeInfo CamelCaseOptions
 
-part3 :: Spec
-part3 = do
+part4 :: Spec
+part4 = do
   describe "parseArguments" $ do
     it "turns camelCase selectors to lowercase and seperates with a dash" $ do
       parse "--camel-case foo" `shouldBe` Success (CamelCaseOptions "foo")
@@ -213,8 +211,8 @@ data WithUnderscore
 instance Generic WithUnderscore
 instance HasDatatypeInfo WithUnderscore
 
-part4 :: Spec
-part4 = do
+part5 :: Spec
+part5 = do
   describe "parseArguments" $ do
     it "ignores leading underscores in field names" $ do
       parse "--with-underscore foo"
